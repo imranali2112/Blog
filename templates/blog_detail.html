@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ blog.title }} - Blog Detail</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body style */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure body takes full height of the screen */
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+
+        header nav a:hover {
+            color: #f39c12;
+        }
+
+        .blog-detail {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px; /* Space between content and footer */
+            flex-grow: 1; /* Allow blog detail to expand and take up space */
+        }
+
+        .blog-detail h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .blog-detail .meta {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .blog-detail .meta span {
+            margin-right: 20px;
+        }
+
+        .blog-detail img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .blog-detail .content {
+            font-size: 16px;
+            color: #333;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            margin-top: auto; /* Push footer to the bottom */
+            width: 100%;
+        }
+
+        /* Button Style for Blog List */
+        .button {
+            display: inline-block;
+            background-color: #4CAF50; /* Green background */
+            color: white;
+            font-size: 16px;
+            padding: 12px 24px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px; /* Space above the button */
+        }
+
+        .button:hover {
+            background-color: #45a049; /* Darker green when hovered */
+        }
+
+        .button:focus {
+            outline: none; /* Remove outline on click */
+        }
+
+        .button-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">My Blog</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="{% url 'blog' %}">Add Blog</a>
+            <a href="{% url 'blog_list' %}">Blog List</a>
+        </nav>
+    </header>
+
+    <!-- Blog Detail Section -->
+    <form action="POST">
+        <div class="blog-detail">
+            <h1>{{ blogs.title }}</h1>
+            <div class="meta">
+                <span>Posted by: {{ blogs.user }}</span>
+                <span>Date: {{ blogs.created_at|date:"F j, Y" }}</span>
+            </div>
+            {% if blogs.blog_image %}
+            <img src="{{ blogs.blog_image.url }}" alt="Blog Image">
+            {% endif %}
+            <div class="content">
+                <p>{{ blogs.content }}</p>
+            </div>
+        </div>
+    </form>
+
+    <!-- Blog List Button -->
+    <div class="button-container">
+        <a href="{% url 'blog_list' %}" class="button">Back to Blog List</a>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 My Blog. All rights reserved.</p>
+    </footer>
+</body>
+</html>

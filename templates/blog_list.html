@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog List</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+        header nav a:hover {
+            color: #f39c12;
+        }
+        .blog-list {
+            padding: 20px;
+            flex: 2; /* This makes sure the blog list takes available space */
+        }
+        .blog-item {
+            background-color: #f4f4f4;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            position: relative; /* Allows positioning buttons on the right */
+        }
+        .blog-item h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .blog-item .meta {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .blog-item .meta span {
+            margin-right: 20px;
+        }
+        .blog-item .buttons {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+        .blog-item .buttons a {
+            color: #fff;
+            background-color: #333;
+            padding: 8px 12px;
+            margin-right: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .blog-item .buttons a:hover {
+            background-color: #f39c12;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">My Blog</div>
+        <nav>
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'blog' %}">Add Blog</a>
+            <a href="#">Blog List</a>
+        </nav>
+    </header>
+
+    <!-- Blog List Section -->
+    {%for message in messages %}
+    <script>
+      alert('{{message}}');
+    </script>
+    {%endfor%}
+    <div class="blog-list">
+        <h1>Blog List</h1>
+        {% for blog in blogs %}
+        <div class="blog-item">
+            <h2><a href="{% url 'blog_detail' blog.id %}">{{ blog.title }}</a></h2>
+            <div class="meta">
+                <span>Posted by: {{ blog.user.username }}</span>
+                <span>Date: {{ blog.created_at|date:"F j, Y" }}</span>
+            </div>
+            <!-- Buttons placed at the right side of each blog item -->
+            <div class="buttons">
+                <a href="{% url 'blog_detail' blog.id %}">View</a>
+                <a href="{% url 'blog_update' blog.id %}">Update</a>
+                <a href="{% url 'blog_delete' blog.id %}">Delete</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No blogs available.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 My Blog. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Website - Home</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+        header nav a:hover {
+            color: #f39c12;
+        }
+        .hero {
+            flex: 1; /* Allows the hero section to fill available space */
+            background-color: #f4f4f4;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #555;
+        }
+        .hero button {
+            background-color: #f39c12;
+            border: none;
+            padding: 10px 20px;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .hero button:hover {
+            background-color: #d35400;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">My Blog</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="{% url 'blog' %}">Add Blog</a>
+            <a href="{% url 'blog_list' %}">Blog List</a>
+        </nav>
+    </header>
+    {%for message in messages %}
+    <script>
+      alert('{{message}}');
+    </script>
+    {%endfor%}
+
+    <!-- Hero Section -->
+     {% for about in about %}
+    <div class="hero">
+        <h1>{{ about.title }}</h1>
+        <p>{{ about.author }}</p>
+        <p>{{ about.content}}</p>
+        <!-- <button onclick="location.href='/blog-list'">View Blogs</button> -->
+    </div>
+    {% endfor %}
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 My Blog. All rights reserved.</p>
+    </footer>
+</body>
+</html>
